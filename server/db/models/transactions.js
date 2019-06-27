@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize')
 const db = require('../db')
 
-const transactionLedger = db.define('transaction', {
+const Transactions = db.define('transaction', {
   type: {
     type: Sequelize.ENUM,
     values: ['buy', 'sell']
@@ -20,4 +20,4 @@ const transactionLedger = db.define('transaction', {
   }
 })
 
-module.exports = transactionLedger
+module.exports = Transactions
