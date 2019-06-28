@@ -3,7 +3,8 @@ const Portfolio = require('./portfolio')
 const Holdings = require('./holdings')
 const Transactions = require('./transactions')
 
-Portfolio.belongsTo(User)
+User.hasOne(Portfolio)
+// Portfolio.belongsTo(User)
 Portfolio.hasMany(Holdings)
 User.hasMany(Transactions)
 

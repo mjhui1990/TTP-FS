@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
-import {Button, Form} from 'semantic-ui-react'
+import {Button, Form, Card} from 'semantic-ui-react'
 import {auth} from '../store'
 
 /**
@@ -11,14 +11,25 @@ const AuthForm = props => {
   const {name, displayName, handleSubmit, error} = props
 
   return (
-    <div>
+    <div id="AuthBox">
       <Form onSubmit={handleSubmit} name={name}>
-        <Form.Field>
-          <label htmlFor="email">
-            <small>Email</small>
-          </label>
-          <input name="email" type="text" />
-        </Form.Field>
+        <div>
+          <Form.Field width={12}>
+            <label htmlFor="email">
+              <small>Email</small>
+            </label>
+            <input name="email" type="text" />
+          </Form.Field>
+        </div>
+        <div>
+          <Form.Field width={12}>
+            <label htmlFor="name">
+              <small>name</small>
+            </label>
+            <input name="fullName" type="text" />
+          </Form.Field>
+        </div>
+
         <Form.Field>
           <label htmlFor="password">
             <small>Password</small>
@@ -30,7 +41,6 @@ const AuthForm = props => {
         </Form.Field>
         {error && error.response && <div> {error.response.data} </div>}
       </Form>
-      <a href="/auth/google">{displayName} with Google</a>
     </div>
   )
 }
@@ -64,8 +74,9 @@ const mapDispatch = dispatch => {
       evt.preventDefault()
       const formName = evt.target.name
       const email = evt.target.email.value
+      const fullName = evt.target.fullName.value
       const password = evt.target.password.value
-      dispatch(auth(email, password, formName))
+      dispatch(auth(email, password, fullName, formName))
     }
   }
 }
