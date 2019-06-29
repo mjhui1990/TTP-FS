@@ -1,34 +1,50 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React, {Component, useEffect} from 'react'
 import {connect} from 'react-redux'
+import {getPortfolio} from '../store/portfolio'
 
-/**
- * COMPONENT
- */
-export const UserHome = props => {
-  const {email} = props
+class UserHome extends Component {
+  constructor(props) {
+    super(props)
+  }
 
-  return (
-    <div>
-      <h3>Welcome, {email}</h3>
-    </div>
-  )
+  componentDidMount() {
+    this.props.fetchPortfolio(this.props.email)
+  }
+
+  render() {
+    return (
+      <div>
+        <h3>Welcome, {this.props.email}</h3>
+      </div>
+    )
+  }
 }
 
-/**
- * CONTAINER
- */
+// export const UserHome = props => {
+//   const {email, fetchPortfolio} = props
+//   console.log(props)
+//   useEffect((props) => {
+//     console.log('yyyy')
+//     fetchPortfolio(props)
+//   })
+
+//   return (
+//     <div>
+//       <h3>Welcome, {email}</h3>
+//     </div>
+//   )
+// }
+
 const mapState = state => {
   return {
     email: state.user.email
   }
 }
 
-export default connect(mapState)(UserHome)
-
-/**
- * PROP TYPES
- */
-UserHome.propTypes = {
-  email: PropTypes.string
+const mapDispatch = dispatch => {
+  return {
+    fetchPortfolio: email => dispatch(getPortfolio(email))
+  }
 }
+
+export default connect(mapState, mapDispatch)(UserHome)
