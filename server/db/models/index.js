@@ -3,9 +3,10 @@ const Portfolio = require('./portfolio')
 const Holdings = require('./holdings')
 const Transactions = require('./transactions')
 
-User.hasOne(Portfolio)
-// Portfolio.belongsTo(User)
+Portfolio.belongsTo(User, {foreignKey: User.id})
 Portfolio.hasMany(Holdings)
+
+User.hasOne(Portfolio)
 User.hasMany(Transactions)
 
 module.exports = {
