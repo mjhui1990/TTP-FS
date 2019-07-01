@@ -19,8 +19,7 @@ const getPortfolioAndHoldings = async email => {
   const DataValues = info.get({plain: true})
 
   const filterInfo = {
-    portfolio: {...DataValues.portfolio},
-    holdings: [...DataValues.portfolio.holdings]
+    portfolio: {...DataValues.portfolio}
   }
 
   return filterInfo
