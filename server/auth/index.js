@@ -3,6 +3,7 @@ const {User, Portfolio} = require('../db/models')
 module.exports = router
 
 router.post('/login', async (req, res, next) => {
+  console.log(req.body)
   try {
     const user = await User.findOne({where: {email: req.body.email}})
     if (!user) {
@@ -22,7 +23,7 @@ router.post('/login', async (req, res, next) => {
 router.post('/signup', async (req, res, next) => {
   const {name, email, password} = req.body
   try {
-    const user = await User.create({name, email, password}, {raw: true}).then(
+    const user = await User.create({name, email, password}).then(
       data => data.dataValues
     )
     await Portfolio.create({userId: user.id})

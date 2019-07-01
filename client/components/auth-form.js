@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
-import {Button, Form, Card} from 'semantic-ui-react'
+import {Button, Form} from 'semantic-ui-react'
 import {auth} from '../store'
 
 /**
@@ -9,6 +9,17 @@ import {auth} from '../store'
  */
 const AuthForm = props => {
   const {name, displayName, handleSubmit, error} = props
+  const nameField = (
+    <div>
+      <Form.Field width={12}>
+        <label htmlFor="name">
+          <small>name</small>
+        </label>
+        <input name="fullName" type="text" />
+      </Form.Field>
+    </div>
+  )
+  const isSignUpForm = displayName === 'Sign Up' ? nameField : null
 
   return (
     <div id="AuthBox">
@@ -21,14 +32,8 @@ const AuthForm = props => {
             <input name="email" type="text" />
           </Form.Field>
         </div>
-        <div>
-          <Form.Field width={12}>
-            <label htmlFor="name">
-              <small>name</small>
-            </label>
-            <input name="fullName" type="text" />
-          </Form.Field>
-        </div>
+
+        {isSignUpForm}
 
         <Form.Field>
           <label htmlFor="password">
@@ -74,7 +79,7 @@ const mapDispatch = dispatch => {
       evt.preventDefault()
       const formName = evt.target.name
       const email = evt.target.email.value
-      const fullName = evt.target.fullName.value
+      const fullName = evt.target.fullName ? evt.target.fullName.value : null
       const password = evt.target.password.value
       dispatch(auth(email, password, fullName, formName))
     }

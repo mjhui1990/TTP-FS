@@ -20,21 +20,6 @@ class UserHome extends Component {
   }
 }
 
-// export const UserHome = props => {
-//   const {email, fetchPortfolio} = props
-//   console.log(props)
-//   useEffect((props) => {
-//     console.log('yyyy')
-//     fetchPortfolio(props)
-//   })
-
-//   return (
-//     <div>
-//       <h3>Welcome, {email}</h3>
-//     </div>
-//   )
-// }
-
 const mapState = state => {
   return {
     email: state.user.email
