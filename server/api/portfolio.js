@@ -4,7 +4,9 @@ const getPortfolioAndHoldings = require('../db/queries')
 
 router.get('/', async (req, res) => {
   const {email} = req.query
-  const userData = await getPortfolioAndHoldings(email)
+  const userData = await getPortfolioAndHoldings(email).catch(
+    res.status(404).json(userData)
+  )
   res.json(userData)
 })
 
