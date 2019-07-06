@@ -17,6 +17,12 @@ const Transactions = db.define('transaction', {
   purchasePrice: {
     type: Sequelize.DOUBLE,
     allowNull: false
+  },
+  totalValue: {
+    type: Sequelize.VIRTUAL,
+    get() {
+      return this.getDataValue('purchasePrice') * this.getDataValue('shares')
+    }
   }
 })
 

@@ -12,7 +12,15 @@ const getPortfolioAndHoldings = async email => {
     include: [
       {
         model: Portfolio,
-        include: [{model: Holding}]
+        attributes: ['buyingPower'],
+        include: [
+          {
+            model: Holding,
+            attributes: {
+              include: ['id', 'ticker', 'shares', 'purchasePrice']
+            }
+          }
+        ]
       }
     ]
   })
@@ -21,6 +29,8 @@ const getPortfolioAndHoldings = async email => {
   const filterInfo = {
     portfolio: {...DataValues.portfolio}
   }
+
+  console.log(filterInfo)
 
   return filterInfo
 }

@@ -2,7 +2,9 @@ import axios from 'axios'
 
 const GET_PORTFOLIO = 'GET_PORTFOLIO'
 
-const defaultPortfolio = {}
+const defaultPortfolio = {
+  holdings: []
+}
 
 const getData = portfolio => ({type: GET_PORTFOLIO, payload: portfolio})
 
@@ -15,7 +17,6 @@ export const getPortfolio = email => async dispatch => {
 }
 
 export default function(state = defaultPortfolio, action) {
-  console.log(action)
   switch (action.type) {
     case GET_PORTFOLIO:
       return action.payload
