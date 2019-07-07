@@ -2,11 +2,8 @@ import React from 'react'
 import {connect} from 'react-redux'
 
 const SingleStockView = props => {
-  console.log(props.stock)
-
   let data = props.stock
-
-  const infoArray = [<p>hello</p>]
+  const infoArray = []
   if (data.symbol) {
     for (let p in data) {
       infoArray.push(
@@ -20,10 +17,8 @@ const SingleStockView = props => {
 }
 
 const mapState = state => {
-  console.log(state.stock)
   return {
     stock: state.stock
   }
 }
-
 export default connect(mapState, null)(SingleStockView)

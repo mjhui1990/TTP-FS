@@ -12,5 +12,23 @@ module.exports = async ticker => {
         data: `Cannot find ticker symbol : ${ticker}`
       }
     })
-  return data
+  const {
+    symbol,
+    companyName,
+    open,
+    close,
+    week52High,
+    week52Low,
+    latestPrice
+  } = data
+  const returnData = {
+    symbol,
+    companyName,
+    latestPrice,
+    open,
+    close,
+    week52Low,
+    week52High
+  }
+  return returnData
 }
