@@ -1,13 +1,14 @@
 import React, {Component} from 'react'
+import {connect} from 'react-redux'
 import {FormField, Form, Button} from 'semantic-ui-react'
 import axios from 'axios'
+import {getStock} from '../store/stock'
 
 class SingleStockSearch extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      ticker: '',
-      singleStockInfo: {}
+      ticker: ''
     }
   }
 
@@ -18,14 +19,7 @@ class SingleStockSearch extends Component {
   handleSubmit = async event => {
     event.preventDefault()
     const tickerSym = this.state.ticker
-    const response = await axios.get('/api/holdings', {
-      params: {
-        ticker: tickerSym
-      }
-    })
-    this.setState(state => {
-      return {singleStockInfo: response}
-    })
+    this.props.fetchStock(tickerSym)
   }
 
   render() {
@@ -47,4 +41,10 @@ class SingleStockSearch extends Component {
   }
 }
 
-export default SingleStockSearch
+const mapDispatch = dispatch => {
+  return {
+    fetchStock: ticker => dispatch(getStock(ticker))
+  }
+}
+
+export default connect(null, mapDispatch)(SingleStockSearch)

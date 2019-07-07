@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {Table, Tab, Grid, Card} from 'semantic-ui-react'
+import {Table, Grid, Card} from 'semantic-ui-react'
 import moment from 'moment'
 
 import {getPortfolio} from '../store/portfolio'

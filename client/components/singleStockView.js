@@ -1,16 +1,13 @@
 import React from 'react'
+import {connect} from 'react-redux'
 
 const SingleStockView = props => {
-  const data = {
-    symbol: 'AMD',
-    companyName: 'Advanced Micro Sytem',
-    marketCap: '12321312',
-    week52low: 32,
-    week52High: 35
-  }
+  console.log(props.stock)
 
-  const infoArray = []
-  if (data) {
+  let data = props.stock
+
+  const infoArray = [<p>hello</p>]
+  if (data.symbol) {
     for (let p in data) {
       infoArray.push(
         <p key={p}>
@@ -22,4 +19,11 @@ const SingleStockView = props => {
   return <div>{infoArray}</div>
 }
 
-export default SingleStockView
+const mapState = state => {
+  console.log(state.stock)
+  return {
+    stock: state.stock
+  }
+}
+
+export default connect(mapState, null)(SingleStockView)
