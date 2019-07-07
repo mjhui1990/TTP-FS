@@ -1,9 +1,10 @@
-import React, {Component, useEffect} from 'react'
+import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {Table, Tab, Grid, Card} from 'semantic-ui-react'
 import moment from 'moment'
 
 import {getPortfolio} from '../store/portfolio'
+import singleStockSearch from './singleStockSearch'
 
 class UserHome extends Component {
   constructor(props) {
@@ -70,6 +71,7 @@ class UserHome extends Component {
                     <Card.Description content={`Buying Power:${buyingPower}`} />
                   </Card>
                 </Card.Group>
+                <singleStockSearch />
               </Grid.Column>
             </Grid.Row>
           </Grid>
