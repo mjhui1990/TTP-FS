@@ -4,7 +4,8 @@ import {Table, Tab, Grid, Card} from 'semantic-ui-react'
 import moment from 'moment'
 
 import {getPortfolio} from '../store/portfolio'
-import singleStockSearch from './singleStockSearch'
+import SingleStockSearch from './singleStockSearch'
+import SingleStockView from './singleStockView'
 
 class UserHome extends Component {
   constructor(props) {
@@ -71,7 +72,8 @@ class UserHome extends Component {
                     <Card.Description content={`Buying Power:${buyingPower}`} />
                   </Card>
                 </Card.Group>
-                <singleStockSearch />
+                <SingleStockSearch />
+                <SingleStockView />
               </Grid.Column>
             </Grid.Row>
           </Grid>

@@ -6,31 +6,33 @@ class SingleStockSearch extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      ticker: ''
+      ticker: '',
+      singleStockInfo: {}
     }
   }
 
   handleChange = e => {
     this.setState({ticker: e.target.value})
-    console.log(this.state.ticker)
   }
 
   handleSubmit = async event => {
-    const tickerSym = this.state.ticker
     event.preventDefault()
+    const tickerSym = this.state.ticker
     const response = await axios.get('/api/holdings', {
       params: {
         ticker: tickerSym
       }
     })
-    console.log(response)
+    this.setState(state => {
+      return {singleStockInfo: response}
+    })
   }
 
   render() {
     return (
       <div>
         <Form onSubmit={e => this.handleSubmit(e)}>
-          <FormField>
+          <FormField inline>
             <label>Ticker Symbol</label>
             <input
               type="text"
