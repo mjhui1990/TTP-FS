@@ -30,8 +30,6 @@ const getPortfolioAndHoldings = async email => {
     portfolio: {...DataValues.portfolio}
   }
 
-  console.log(filterInfo)
-
   return filterInfo
 }
 

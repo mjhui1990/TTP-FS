@@ -31,7 +31,6 @@ export const me = () => async dispatch => {
 }
 
 export const auth = (email, password, name, method) => async dispatch => {
-  console.log(method)
   const isSignUp =
     method === 'signup' ? {email, password, name} : {email, password}
   let res

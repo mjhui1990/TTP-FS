@@ -1,7 +1,7 @@
 const axios = require('axios')
 const {iexAPIKey} = require('../../secrets')
 
-module.exports = async ticker => {
+const getStockInfo = async ticker => {
   const {data} = await axios
     .get(
       `https://cloud.iexapis.com/v1/stock/${ticker}/quote?token=${iexAPIKey}`
@@ -31,4 +31,16 @@ module.exports = async ticker => {
     week52High
   }
   return returnData
+}
+
+const getStockPrice = async ticker => {
+  const {data} = await axios.get(
+    `https://cloud.iexapis.com/v1/stock/${ticker}/price?token=${iexAPIKey}`
+  )
+  return data
+}
+
+module.exports = {
+  getStockInfo,
+  getStockPrice
 }

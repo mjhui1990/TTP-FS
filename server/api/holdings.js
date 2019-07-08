@@ -1,10 +1,10 @@
 const router = require('express').Router()
-const getStockData = require('../utils/getStockData')
+const {getStockInfo, getStockPrice} = require('../utils/getStockData')
 const createTransaction = require('../utils/createUserTransaction')
 
 router.get('/', async (req, res) => {
   const {ticker} = req.query
-  const response = await getStockData(ticker)
+  const response = await getStockInfo(ticker)
   if (!response.symbol) res.status(404).json(response)
   else res.json(response)
 })
@@ -12,8 +12,8 @@ router.get('/', async (req, res) => {
 router.post('/', async (req, res) => {
   console.log(req.body)
   const {ticker, amount, transaction, userId} = req.body
-  //
-  createTransaction(transaction, ticker, amount, 12, userId)
+  const price = await getStockPrice(ticker)
+  createTransaction(transaction, ticker, amount, price, userId)
 
   res.sendStatus(200)
 })

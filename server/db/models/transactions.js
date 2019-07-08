@@ -1,6 +1,7 @@
 const Sequelize = require('sequelize')
 const db = require('../db')
 const Holding = require('./holdings')
+const Portfolio = require('./portfolio')
 
 const Transactions = db.define('transaction', {
   type: {
@@ -29,13 +30,20 @@ const Transactions = db.define('transaction', {
 
 Transactions.addHook('afterCreate', async (transaction, options) => {
   const createdDataValues = transaction.dataValues
-  console.log(createdDataValues)
+  const totalCost = createdDataValues.shares * createdDataValues.purchasePrice
   await Holding.create({
     ticker: createdDataValues.ticker,
     shares: createdDataValues.shares,
     purchasePrice: createdDataValues.purchasePrice,
     portfolioId: createdDataValues.userId
   })
+  Portfolio.findOne({where: {userId: createdDataValues.userId}}).then(
+    async Portfolio => {
+      const currentBuyingPower = Portfolio.getDataValue('buyingPower')
+      const newBuyingPower = currentBuyingPower - totalCost
+      await Portfolio.update({buyingPower: newBuyingPower})
+    }
+  )
 })
 
 module.exports = Transactions

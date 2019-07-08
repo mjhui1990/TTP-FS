@@ -24,12 +24,18 @@ export const getStock = ticker => async dispatch => {
   return dispatch(getStockData(res.data || {}))
 }
 
-export const buyStock = (transaction, ticker, amount) => async dispatch => {
+export const buyStock = (
+  transaction,
+  ticker,
+  amount,
+  userId
+) => async dispatch => {
   const res = await axios
-    .post('/api/holding', {
+    .post('/api/holdings', {
       transaction,
       amount,
-      ticker
+      ticker,
+      userId
     })
     .catch(err => {
       console.error('cannot buy stock', err)
