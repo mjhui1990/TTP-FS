@@ -1,7 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {FormField, Form, Button} from 'semantic-ui-react'
-import axios from 'axios'
 import {getStock} from '../store/stock'
 
 class SingleStockSearch extends Component {
@@ -16,7 +15,7 @@ class SingleStockSearch extends Component {
     this.setState({ticker: e.target.value})
   }
 
-  handleSubmit = async event => {
+  handleSubmit = event => {
     event.preventDefault()
     const tickerSym = this.state.ticker
     this.props.fetchStock(tickerSym)
@@ -25,9 +24,10 @@ class SingleStockSearch extends Component {
   render() {
     return (
       <div>
-        <Form onSubmit={e => this.handleSubmit(e)}>
+        <Form onSubmit={this.handleSubmit}>
           <FormField inline>
-            <label>Ticker Symbol</label>
+            <h2>Stock Search</h2>
+            <label>Ticker Symbol </label>
             <input
               type="text"
               value={this.state.ticker}
